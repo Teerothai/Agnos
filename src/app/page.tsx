@@ -5,6 +5,7 @@ import Question from "./components/question"
 import Caption from "./components/modalAbs"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
+import {absAreaProps} from "./constant/attributes"
 
 
 export default function Home() {
@@ -71,118 +72,26 @@ export default function Home() {
           id="image"
         />
         <map name="absmap" id="map">
-          <area
-            target=""
-            alt="รอบสะดือ"
-            title="รอบสะดือ"
-            coords="400,517,39"
-            shape="circle"
-            onClick={() =>
-              handleAreaClick(
-                "/abs/umbilicus-highlight.png",
-                "/abs/umbilicus-active.png",
-                "400,517,39"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ลิ้นปี่"
-            title="ลิ้นปี่"
-            coords="343,399,355,373,400,334,439,367,456,399,400,468"
-            shape="poly"
-            onClick={() =>
-              handleAreaClick(
-                "/abs/epigastrium-highlight.png",
-                "/abs/epigastrium-active.png",
-                "343,399,355,373,400,334,439,367,456,399,400,468"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ช่องท้องล่างขวา"
-            title="ช่องท้องล่างขวา"
-            coords="270,524,344,527,371,563,333,641,297,619,266,577"
-            shape="poly"
-            onClick={() =>
-              handleAreaClick(
-                "/abs/rlq-highlight.png",
-                "/abs/rlq-active.png",
-                "270,524,344,527,371,563,333,641,297,619,266,577"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ท้องน้อย"
-            title="ท้องน้อย"
-            coords="398,566,426,582,458,641,427,665,398,673,361,656,345,639,369,592"
-            shape="poly"
-            onClick={() =>
-              handleAreaClick(
-                "/abs/suprapubic-highlight.png",
-                "/abs/suprapubic-active.png",
-                "398,566,426,582,458,641,427,665,398,673,361,656,345,639,369,592"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ปุ่มปวดทั่วท้อง"
-            title="ปุ่มปวดทั่วท้อง"
-            coords="525,914,526,880,506,854,291,855,268,878,269,908,290,933,499,933"
-            shape="poly"
-            onClick={() =>
-              handleAreaClick(
-                "/abs/all-over-highlight.png",
-                "",
-                "525,914,526,880,506,854,291,855,268,878,269,908,290,933,499,933"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ช่องท้องด้านบนขวา"
-            title="ช่องท้องด้านบนขวา"
-            coords="309,410,276,434,270,507,346,509,362,479,383,468,329,403"
-            shape="poly"
-            onClick={() =>
-              handleAreaClick(
-                "/abs/ruq-highlight.png",
-                "/abs/ruq-active.png",
-                "309,410,276,434,270,507,346,509,362,479,383,468,329,403"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ช่องท้องด้านบนซ้าย"
-            title="ช่องท้องด้านบนซ้าย"
-            coords="422,465,467,403,501,411,518,427,530,507,481,509,455,509,444,485"
-            shape="poly"
-            onClick={() =>
-              handleAreaClick(
-                "/abs/luq-highlight.png",
-                "/abs/luq-active.png",
-                "422,465,467,403,501,411,518,427,530,507,481,509,455,509,444,485"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ช่องท้องล่างซ้าย"
-            title="ช่องท้องล่างซ้าย"
-            coords="528,526,529,562,509,607,473,640,453,594,427,565,446,549,456,527"
-            shape="poly"
-            onClick={() =>
-              handleAreaClick(
-                "/abs/llq-highlight.png",
-                "/abs/llq-active.png",
-                "528,526,529,562,509,607,473,640,453,594,427,565,446,549,456,527"
-              )
-            }
-          />
+        {absAreaProps.map((props, index) => {
+          const { img, caption, coord, ...rest } = props;
+          return (
+            <area
+              key={index}
+              target={rest.target}
+              alt={rest.alt}
+              title={rest.title}
+              coords={rest.coords}
+              shape={rest.shape}
+              onClick={() =>
+                handleAreaClick(
+                  img,
+                  caption,
+                  coord
+                )
+              }
+            />
+          );
+        })}
         </map>
         {modalOpen && (
           <Caption
