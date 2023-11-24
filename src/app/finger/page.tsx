@@ -4,7 +4,8 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
 import Question from "../components/question";
-import Caption from "../components/modalFinger";
+import Caption from "../components/modal";
+import Button from "../components/button";
 import {fingerAreaProps} from "../constant/attributes"
 
 export default function Home() {
@@ -98,12 +99,7 @@ export default function Home() {
             captionUrl={modalCaption}
           />
         )}
-        <button 
-          key="next" 
-          onClick={() => {router.push("/")}} 
-          className="hover:-translate-x-5 border border-solid border-blue-500 rounded-2xl px-15 py-15 w-[5rem] h-auto bg-blue-500 cursor-pointer transition duration-300 ease-in-out text-white font-bold text-20px m-side bottom-[2rem] absolute ">
-              Back
-        </button>
+        <Button text="Back" clickEvent={() => {router.push("/")}} style={{left: "0px"}} />
       </div>
     </div>
     </>

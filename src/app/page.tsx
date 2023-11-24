@@ -2,11 +2,11 @@
 
 import Image from "next/image"
 import Question from "./components/question"
-import Caption from "./components/modalAbs"
+import Caption from "./components/modal"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
 import {absAreaProps} from "./constant/attributes"
-
+import Button from "./components/button"
 
 export default function Home() {
   const router = useRouter()
@@ -99,12 +99,7 @@ export default function Home() {
             captionUrl={modalCaption}
           />
         )}
-        <button 
-          key="next" 
-          onClick={() => {router.push("/finger")}} 
-          className="hover:translate-x-5 border border-solid border-blue-500 rounded-2xl px-15 py-15 w-[5rem] h-auto bg-blue-500 cursor-pointer transition duration-300 ease-in-out text-white font-bold text-20px m-side right-0 bottom-[2rem] absolute ">
-              Next
-        </button>
+         <Button text="Next" clickEvent={() => {router.push("/finger")}} style={{right: "0px"}} />
       </div>
     </div>
     </>
