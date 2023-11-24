@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
 import Question from "../components/question";
-import Caption from "../components/modal";
+import Caption from "../components/modalFinger";
 
 
 export default function Home() {
@@ -12,8 +12,7 @@ export default function Home() {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalImg, setModalImg] = useState("")
   const [modalCaption, setModalCaption] = useState("")
-  const [modalCoords, setModalCoords] = useState([0, 0])
-  const [allCoords, setAllCoords] = useState<string[]>(["400,517,39", "343,399,355,373,400,334,439,367,456,399,400,468","270,524,344,527,371,563,333,641,297,619,266,577","398,566,426,582,458,641,427,665,398,673,361,656,345,639,369,592", "525,914,526,880,506,854,291,855,268,878,269,908,290,933,499,933","309,410,276,434,270,507,346,509,362,479,383,468,329,403","422,465,467,403,501,411,518,427,530,507,481,509,455,509,444,485","528,526,529,562,509,607,473,640,453,594,427,565,446,549,456,527"])
+  const allCoords = ["177,238,199,231,218,240,217,260,192,272,175,266,172,250", "280,134,308,131,323,144,313,161,286,165,270,151", "367,91,398,85,411,99,404,119,371,121,355,107", "458,131,467,111,502,112,514,128,500,144,470,146","199,333,205,313,232,303,248,312,244,334,215,345", "283,234,321,228,335,244,325,263,289,268,275,255","373,197,410,194,422,211,412,228,376,230,363,217","466,209,503,209,518,226,504,244,465,243,455,226", "635,406,654,396,683,417,679,432,663,446,636,425","234,405,273,390,293,397,297,417,288,433,252,444,232,440,227,422","299,372,343,357,360,368,365,386,353,401,312,413,299,404,294,389","377,344,423,340,436,355,436,373,423,386,383,388,370,374,367,359","460,340,503,345,515,359,511,380,497,389,454,382,445,368,446,352","596,506,618,529,623,549,607,564,585,558,563,537,564,519,573,509","146,881,121,903,119,935,143,959,661,960,687,939,687,904,660,879"]
 
   const handleAreaClick = (img: string, caption: string, coord: string) => {
     if (modalOpen) {
@@ -30,7 +29,7 @@ export default function Home() {
     const map = document.getElementById("map") as HTMLElement;
 
     Array.from(map.querySelectorAll("area")).forEach((area, index) => {
-      const coords = allCoords[index]; // ensure coords is not null
+      const coords = allCoords[index];
       const coordsArray = coords.split(",");
 
       let scaledCoords = "";
@@ -60,136 +59,144 @@ export default function Home() {
   return (
     <>
     <div className="flex flex-col items-center">
-      <Question question={"ปวดท้องที่บริเวณใดมากที่สุด"} />
+      <Question question={"จุดไหนที่คุณปวดนิ้วมากที่สุด"} />
       <div className="relative">
         <Image
-          src="/abs/default-abs.png"
+          src="/finger/default-finger.png"
           alt="abs"
           width={828}
           height={976}
-          useMap="#absmap"
+          useMap="#fingermap"
           className="pointer-events-auto"
           id="image"
         />
-        <map name="absmap" id="map">
-          <area
-            target=""
-            alt="รอบสะดือ"
-            title="รอบสะดือ"
-            coords="400,517,39"
-            shape="circle"
+        <map name="fingermap" id="map">
+            <area target="" alt="ข้อนิ้วส่วนปลาย" title="ข้อนิ้วส่วนปลาย" coords="177,238,199,231,218,240,217,260,192,272,175,266,172,250" shape="poly" 
             onClick={() =>
               handleAreaClick(
-                "/abs/umbilicus-highlight.png",
-                "/abs/umbilicus-active.png",
-                "400,517,39"
+                "/finger/dip-highlight.png",
+                "/finger/dip-active.png",
+                "177,238,199,231,218,240,217,260,192,272,175,266,172,250"
               )
-            }
-          />
-          <area
-            target=""
-            alt="ลิ้นปี่"
-            title="ลิ้นปี่"
-            coords="343,399,355,373,400,334,439,367,456,399,400,468"
-            shape="poly"
+            } />
+            <area target="" alt="ข้อนิ้วส่วนปลาย" title="ข้อนิ้วส่วนปลาย" coords="280,134,308,131,323,144,313,161,286,165,270,151" shape="poly" 
             onClick={() =>
-              handleAreaClick(
-                "/abs/epigastrium-highlight.png",
-                "/abs/epigastrium-active.png",
-                "343,399,355,373,400,334,439,367,456,399,400,468"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ช่องท้องล่างขวา"
-            title="ช่องท้องล่างขวา"
-            coords="270,524,344,527,371,563,333,641,297,619,266,577"
-            shape="poly"
+                handleAreaClick(
+                  "/finger/dip-highlight.png",
+                  "/finger/dip-active.png",
+                  "280,134,308,131,323,144,313,161,286,165,270,151"
+                )
+              }/>
+            <area target="" alt="ข้อนิ้วส่วนปลาย" title="ข้อนิ้วส่วนปลาย" coords="367,91,398,85,411,99,404,119,371,121,355,107" shape="poly" 
             onClick={() =>
-              handleAreaClick(
-                "/abs/rlq-highlight.png",
-                "/abs/rlq-active.png",
-                "270,524,344,527,371,563,333,641,297,619,266,577"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ท้องน้อย"
-            title="ท้องน้อย"
-            coords="398,566,426,582,458,641,427,665,398,673,361,656,345,639,369,592"
-            shape="poly"
+                handleAreaClick(
+                  "/finger/dip-highlight.png",
+                  "/finger/dip-active.png",
+                  "367,91,398,85,411,99,404,119,371,121,355,107"
+                )
+              }/>
+            <area target="" alt="ข้อนิ้วส่วนปลาย" title="ข้อนิ้วส่วนปลาย" coords="458,131,467,111,502,112,514,128,500,144,470,146" shape="poly" 
             onClick={() =>
-              handleAreaClick(
-                "/abs/suprapubic-highlight.png",
-                "/abs/suprapubic-active.png",
-                "398,566,426,582,458,641,427,665,398,673,361,656,345,639,369,592"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ปุ่มปวดทั่วท้อง"
-            title="ปุ่มปวดทั่วท้อง"
-            coords="525,914,526,880,506,854,291,855,268,878,269,908,290,933,499,933"
-            shape="poly"
+                handleAreaClick(
+                  "/finger/dip-highlight.png",
+                  "/finger/dip-active.png",
+                  "458,131,467,111,502,112,514,128,500,144,470,146"
+                )
+              }
+            />
+            <area target="" alt="ข้อนิ้วมือส่วนต้น" title="ข้อนิ้วมือส่วนต้น" coords="199,333,205,313,232,303,248,312,244,334,215,345" shape="poly" 
             onClick={() =>
-              handleAreaClick(
-                "/abs/all-over-highlight.png",
-                "",
-                "525,914,526,880,506,854,291,855,268,878,269,908,290,933,499,933"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ช่องท้องด้านบนขวา"
-            title="ช่องท้องด้านบนขวา"
-            coords="309,410,276,434,270,507,346,509,362,479,383,468,329,403"
-            shape="poly"
+                handleAreaClick(
+                  "/finger/pip-highlight.png",
+                  "/finger/pip-active.png",
+                  "199,333,205,313,232,303,248,312,244,334,215,345"
+                )
+              }/>
+            <area target="" alt="ข้อนิ้วมือส่วนต้น" title="ข้อนิ้วมือส่วนต้น" coords="283,234,321,228,335,244,325,263,289,268,275,255" shape="poly" 
             onClick={() =>
-              handleAreaClick(
-                "/abs/ruq-highlight.png",
-                "/abs/ruq-active.png",
-                "309,410,276,434,270,507,346,509,362,479,383,468,329,403"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ช่องท้องด้านบนซ้าย"
-            title="ช่องท้องด้านบนซ้าย"
-            coords="422,465,467,403,501,411,518,427,530,507,481,509,455,509,444,485"
-            shape="poly"
+                handleAreaClick(
+                  "/finger/pip-highlight.png",
+                  "/finger/pip-active.png",
+                  "283,234,321,228,335,244,325,263,289,268,275,255"
+                )
+              }/>
+            <area target="" alt="ข้อนิ้วมือส่วนต้น" title="ข้อนิ้วมือส่วนต้น" coords="373,197,410,194,422,211,412,228,376,230,363,217" shape="poly" 
             onClick={() =>
-              handleAreaClick(
-                "/abs/luq-highlight.png",
-                "/abs/luq-active.png",
-                "422,465,467,403,501,411,518,427,530,507,481,509,455,509,444,485"
-              )
-            }
-          />
-          <area
-            target=""
-            alt="ช่องท้องล่างซ้าย"
-            title="ช่องท้องล่างซ้าย"
-            coords="528,526,529,562,509,607,473,640,453,594,427,565,446,549,456,527"
-            shape="poly"
+                handleAreaClick(
+                  "/finger/pip-highlight.png",
+                  "/finger/pip-active.png",
+                  "373,197,410,194,422,211,412,228,376,230,363,217"
+                )
+              }/>
+            <area target="" alt="ข้อนิ้วมือส่วนต้น" title="ข้อนิ้วมือส่วนต้น" coords="466,209,503,209,518,226,504,244,465,243,455,226" shape="poly" 
             onClick={() =>
-              handleAreaClick(
-                "/abs/llq-highlight.png",
-                "/abs/llq-active.png",
-                "528,526,529,562,509,607,473,640,453,594,427,565,446,549,456,527"
-              )
-            }
-          />
+                handleAreaClick(
+                  "/finger/pip-highlight.png",
+                  "/finger/pip-active.png",
+                  "466,209,503,209,518,226,504,244,465,243,455,226"
+                )
+              }/>
+            <area target="" alt="ข้อนิ้วมือส่วนต้น" title="ข้อนิ้วมือส่วนต้น" coords="635,406,654,396,683,417,679,432,663,446,636,425" shape="poly" 
+            onClick={() =>
+                handleAreaClick(
+                  "/finger/pip-highlight.png",
+                  "/finger/pip-active.png",
+                  "635,406,654,396,683,417,679,432,663,446,636,425"
+                )
+              }/>
+            <area target="" alt="ข้อโคนนิ้วมือ" title="ข้อโคนนิ้วมือ" coords="234,405,273,390,293,397,297,417,288,433,252,444,232,440,227,422" shape="poly" 
+            onClick={() =>
+                handleAreaClick(
+                  "/finger/mcp-highlight.png",
+                  "/finger/mcp-active.png",
+                  "234,405,273,390,293,397,297,417,288,433,252,444,232,440,227,422"
+                )
+              }/>
+            <area target="" alt="ข้อโคนนิ้วมือ" title="ข้อโคนนิ้วมือ" coords="299,372,343,357,360,368,365,386,353,401,312,413,299,404,294,389" shape="poly" 
+            onClick={() =>
+                handleAreaClick(
+                  "/finger/mcp-highlight.png",
+                  "/finger/mcp-active.png",
+                  "299,372,343,357,360,368,365,386,353,401,312,413,299,404,294,389"
+                )
+              }/>
+            <area target="" alt="ข้อโคนนิ้วมือ" title="ข้อโคนนิ้วมือ" coords="377,344,423,340,436,355,436,373,423,386,383,388,370,374,367,359" shape="poly" 
+             onClick={() =>
+                handleAreaClick(
+                  "/finger/mcp-highlight.png",
+                  "/finger/mcp-active.png",
+                  "377,344,423,340,436,355,436,373,423,386,383,388,370,374,367,359"
+                )
+              }/>
+            <area target="" alt="ข้อโคนนิ้วมือ" title="ข้อโคนนิ้วมือ" coords="460,340,503,345,515,359,511,380,497,389,454,382,445,368,446,352" shape="poly" 
+            onClick={() =>
+                handleAreaClick(
+                  "/finger/mcp-highlight.png",
+                  "/finger/mcp-active.png",
+                  "460,340,503,345,515,359,511,380,497,389,454,382,445,368,446,352"
+                )
+              }/>
+            <area target="" alt="ข้อโคนนิ้วมือ" title="ข้อโคนนิ้วมือ" coords="596,506,618,529,623,549,607,564,585,558,563,537,564,519,573,509" shape="poly" 
+            onClick={() =>
+                handleAreaClick(
+                  "/finger/mcp-highlight.png",
+                  "/finger/mcp-active.png",
+                  "596,506,618,529,623,549,607,564,585,558,563,537,564,519,573,509"
+                )
+              }/>
+            <area target="" alt="ปุ่มทั้งหมด" title="ปุ่มทั้งหมด" coords="146,881,121,903,119,935,143,959,661,960,687,939,687,904,660,879" shape="poly" 
+            onClick={() =>
+                handleAreaClick(
+                  "/finger/others-highlight.png",
+                  "",
+                  "146,881,121,903,119,935,143,959,661,960,687,939,687,904,660,879"
+                )
+              }/>
         </map>
         {modalOpen && (
           <Caption
             imageUrl={modalImg}
             captionUrl={modalCaption}
-            coordinates={modalCoords}
           />
         )}
         <button 
